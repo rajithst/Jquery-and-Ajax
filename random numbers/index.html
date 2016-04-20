@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajax</title>
+
+    <script>
+            var xhttp;
+                xhttp = new XMLHttpRequest();
+            
+            function getData() {
+                
+                if (xhttp) {
+                    document.getElementById('image').src="ajax-loader.gif";
+                    var path= 'getdata.php';
+                    xhttp.open("GET",path);
+
+                    xhttp.onreadystatechange = function(){
+                        if (xhttp.readyState == 4 && xhttp.status == 200) {
+                            document.getElementById('targetDiv').innerHTML = xhttp.responseText;
+                            document.getElementById('image').src="init.png";
+                        }
+                    }
+
+
+                    xhttp.send(null);
+                }
+            }
+    </script>
+</head>
+<body>
+
+    <form action="">
+        <input type="button" value="display" onclick="getData()">
+    </form>
+
+    <div id="targetDiv">
+        <img id="image" src="init.png">
+        <p>The fetched data</p>
+    </div>
+    
+</body>
+</html>
